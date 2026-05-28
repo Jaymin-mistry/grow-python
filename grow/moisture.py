@@ -44,7 +44,7 @@ class Moisture(object):
             if self._gpio_pin == 8:
                 raise RuntimeError("""Unable to set up edge detection on BCM8.
 
-Please ensure you add the following to /boot/config.txt and reboot:
+Please ensure you add the following to /boot/firmware/config.txt and reboot:
 
 dtoverlay=spi0-cs,cs0_pin=14 # Re-assign CS0 from BCM 8 so that Grow can use it
 
