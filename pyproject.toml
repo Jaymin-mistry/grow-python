@@ -40,7 +40,8 @@ dependencies = [
 	"st7735>=0.0.5",
 	"pyyaml",
 	"fonts",
-	"font-roboto"
+	"font-roboto",
+	"rpi-lgpio"
 ]
 
 [project.urls]
