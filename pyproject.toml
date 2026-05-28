@@ -120,6 +120,6 @@ ignore = [
 ]
 
 [tool.pimoroni]
-apt_packages = []
-configtxt = []
-commands = []
+apt_packages = ["python3-lgpio"]
+configtxt = ["dtoverlay=spi0-cs,cs0_pin=14"]
+commands = ["raspi-config nonint do_spi 0", "raspi-config nonint do_i2c 0"]
