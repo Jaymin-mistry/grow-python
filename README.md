@@ -23,25 +23,44 @@ curl -sSL https://get.pimoroni.com/grow | bash
 
 * `git clone https://github.com/pimoroni/grow-python`
 * `cd grow-python`
-* `sudo ./install.sh`
+* `./install.sh`
 
 **Note** Raspbian Lite users may first need to install git: `sudo apt install git`
 
 ## Or... Install from PyPi and configure manually:
 
-* Install dependencies:
+* Install system dependencies:
 
 ```
-sudo apt install python3-setuptools python3-pip python3-yaml python3-smbus python3-pil python3-spidev python3-rpi.gpio
+sudo apt install python3-setuptools python3-pip python3-yaml python3-smbus python3-pil python3-spidev python3-lgpio
 ```
 
-* Run `sudo pip3 install growhat`
+* Create and activate a virtual environment (required on Bookworm and later):
+
+```
+python3 -m venv --system-site-packages ~/.virtualenvs/growhat
+source ~/.virtualenvs/growhat/bin/activate
+```
+
+* Install the library:
+
+```
+pip install growhat
+```
 
 **Note** this won't perform any of the required configuration changes on your Pi, you may additionally need to:
 
 * Enable i2c: `sudo raspi-config nonint do_i2c 0`
 * Enable SPI: `sudo raspi-config nonint do_spi 0`
-* Add the following to `/boot/config.txt`: `dtoverlay=spi0-cs,cs0_pin=14`
+* Add the following to `/boot/firmware/config.txt`: `dtoverlay=spi0-cs,cs0_pin=14`
+
+## Raspberry Pi 5 and Bookworm
+
+Raspberry Pi 5 uses a new GPIO chip (RP1) that is not supported by the legacy `RPi.GPIO` library. This library declares `rpi-lgpio` as a dependency, which provides a drop-in `RPi.GPIO`-compatible API backed by `lgpio`. Installing via the steps above (pip inside a venv) handles this automatically.
+
+If you previously installed the legacy `rpi.gpio` apt package system-wide, the venv will take precedence — `rpi-lgpio` installed into the venv shadows the broken system package.
+
+Bookworm enforces PEP 668 and rejects pip installs outside a virtual environment with an "externally-managed-environment" error. Always use a virtual environment as shown above.
 
 ## Monitoring
 
