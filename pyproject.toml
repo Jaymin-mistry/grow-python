@@ -41,7 +41,7 @@ dependencies = [
 	"pyyaml",
 	"fonts",
 	"font-roboto",
-	"rpi-lgpio"
+	"rpi-lgpio; platform_machine == 'armv7l' or platform_machine == 'aarch64'"
 ]
 
 [project.urls]
