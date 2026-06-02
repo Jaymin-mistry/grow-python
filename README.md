@@ -52,7 +52,7 @@ pip install growhat
 
 * Enable i2c: `sudo raspi-config nonint do_i2c 0`
 * Enable SPI: `sudo raspi-config nonint do_spi 0`
-* Add the following to `/boot/firmware/config.txt`: `dtoverlay=spi0-cs,cs0_pin=14`
+* Add the following to `/boot/firmware/config.txt` (or `/boot/config.txt` on older OS versions): `dtoverlay=spi0-cs,cs0_pin=14`
 
 ## Raspberry Pi 5 and Bookworm
 
